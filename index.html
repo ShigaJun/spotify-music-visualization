@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="assets/semantic/semantic.min.css">
+<link rel="stylesheet" href="assets/css/semantic_overwrite.css">
+<link rel="stylesheet" href="assets/css/svg.css">
+</head>
+
+<body>
+
+
+
+
+<div class="ui text container header">
+    <div class="ui column grid">
+            <div class="wide column">
+                <div class="ui hidden divider"></div>
+                <h1 class="ui center aligned header">千代田区内におけるAirBnB物件</h1>
+                <div class="ui center aligned basic segment"><span class="caption">データソース：<a href="http://insideairbnb.com/get-the-data.html" target="_blank">Inside Airbnb</a>／データ作成日：2021年10月28日</span></div>
+                <div class="ui hidden divider"></div>
+            </div>
+    </div> 
+</div>
+
+
+
+<div class="ui container">
+    <div id="viewportContainer"></div>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<div class="ui container">
+            <div class="ui three column grid">
+                <div class="column"><div>&nbsp;</div></div>
+                <div class="column"><div><h3>データ変数の選択: </h3><span id="variableSelector"></span></div></div>
+                <div class="column"><div>&nbsp;</div></div>
+            </div>
+</div>
+
+
+
+
+<!-- Library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="assets/semantic/semantic.min.js"></script>
+<script src="https://unpkg.com/pubsub-js"></script>
+<!-- <script src='//unpkg.com/d3@5.16.0/dist/d3.min.js'></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js'></script>
+<!-- /Library -->
+
+<!-- Original -->
+<script src="assets/js/main.js"></script>
+<!-- /Original -->
+
+</body>
+</html>
