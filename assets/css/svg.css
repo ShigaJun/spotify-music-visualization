@@ -47,3 +47,10 @@ body {
 .legend {
     fill: rgba(0,0,0,.87);
 }
+
+#inlineRadarChartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
