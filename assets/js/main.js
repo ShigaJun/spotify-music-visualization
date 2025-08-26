@@ -227,7 +227,49 @@ function drawRadarChartInline(track) {
     .attr("cx", (d, i) => rScale(d) * Math.cos(angleSlice * i - Math.PI / 2))
     .attr("cy", (d, i) => rScale(d) * Math.sin(angleSlice * i - Math.PI / 2))
     .attr("r", 4)
-    .attr("fill", "#2185d0");
+    .attr("fill", "#2185d0")
+    .on("mouseover", function (event, d, i) {
+      const idx = d3.select(this).datum() === undefined ? i : features[i];
+      const feature = features[i];
+      d3.select("#radarTooltip")
+        .style("display", "block")
+        .html(`${feature}: <b>${d.toFixed(3)}</b>`);
+      d3.select(this).attr("fill", "#ff6600");
+    })
+    .on("mousemove", function (event) {
+      d3.select("#radarTooltip")
+        .style("left", event.pageX + 10 + "px")
+        .style("top", event.pageY - 10 + "px");
+    })
+    .on("mouseout", function () {
+      d3.select("#radarTooltip").style("display", "none");
+      d3.select(this).attr("fill", "#2185d0");
+    });
+
+  // 同心円の描画
+  const levels = 5;
+  for (let l = 1; l <= levels; l++) {
+    const r = (radius / levels) * l;
+    const value = (l / levels).toFixed(1);
+
+    g.append("circle")
+      .attr("cx", 0)
+      .attr("cy", 0)
+      .attr("r", r)
+      .attr("fill", "none")
+      .attr("stroke", "#ccc")
+      .attr("stroke-dasharray", "2,2")
+      .attr("stroke-width", 1);
+
+    g.append("text")
+      .attr("x", 0)
+      .attr("y", -r)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", "start")
+      .attr("font-size", "12px")
+      .attr("fill", "#888")
+      .text(value);
+  }
 }
 
 /* --- 人気度ランキング表の描画 --- */
