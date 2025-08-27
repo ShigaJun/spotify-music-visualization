@@ -190,62 +190,6 @@ function drawRadarChartInline(track) {
     .append("g")
     .attr("transform", `translate(${width / 2},${height / 2})`);
 
-  features.forEach((f, i) => {
-    const angle = angleSlice * i - Math.PI / 2;
-    g.append("line")
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", rScale(1) * Math.cos(angle))
-      .attr("y2", rScale(1) * Math.sin(angle))
-      .attr("stroke", "#bbb");
-    g.append("text")
-      .attr("x", rScale(1.1) * Math.cos(angle))
-      .attr("y", rScale(1.1) * Math.sin(angle))
-      .attr("text-anchor", "middle")
-      .attr("font-size", "14px")
-      .text(f);
-  });
-
-  const radarLine = d3
-    .lineRadial()
-    .radius((d) => rScale(d))
-    .angle((d, i) => i * angleSlice);
-
-  g.append("path")
-    .datum(data.concat([data[0]]))
-    .attr("d", radarLine)
-    .attr("fill", "#2185d0")
-    .attr("fill-opacity", 0.5)
-    .attr("stroke", "#2185d0")
-    .attr("stroke-width", 2);
-
-  g.selectAll(".radar-point")
-    .data(data)
-    .enter()
-    .append("circle")
-    .attr("class", "radar-point")
-    .attr("cx", (d, i) => rScale(d) * Math.cos(angleSlice * i - Math.PI / 2))
-    .attr("cy", (d, i) => rScale(d) * Math.sin(angleSlice * i - Math.PI / 2))
-    .attr("r", 4)
-    .attr("fill", "#2185d0")
-    .on("mouseover", function (event, d, i) {
-      const idx = d3.select(this).datum() === undefined ? i : features[i];
-      const feature = features[i];
-      d3.select("#radarTooltip")
-        .style("display", "block")
-        .html(`${feature}: <b>${d.toFixed(3)}</b>`);
-      d3.select(this).attr("fill", "#ff6600");
-    })
-    .on("mousemove", function (event) {
-      d3.select("#radarTooltip")
-        .style("left", event.pageX + 10 + "px")
-        .style("top", event.pageY - 10 + "px");
-    })
-    .on("mouseout", function () {
-      d3.select("#radarTooltip").style("display", "none");
-      d3.select(this).attr("fill", "#2185d0");
-    });
-
   // 同心円の描画
   const levels = 5;
   for (let l = 1; l <= levels; l++) {
@@ -270,6 +214,82 @@ function drawRadarChartInline(track) {
       .attr("fill", "#888")
       .text(value);
   }
+
+  features.forEach((f, i) => {
+    const angle = angleSlice * i - Math.PI / 2;
+    g.append("line")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", rScale(1) * Math.cos(angle))
+      .attr("y2", rScale(1) * Math.sin(angle))
+      .attr("stroke", "#bbb");
+    g.append("text")
+      .attr("x", rScale(1.1) * Math.cos(angle))
+      .attr("y", rScale(1.1) * Math.sin(angle))
+      .attr("text-anchor", "middle")
+      .attr("font-size", "14px")
+      .text(f);
+  });
+
+  const radarLine = d3
+    .lineRadial()
+    .radius((d) => rScale(d))
+    .angle((d, i) => i * angleSlice);
+
+  const radarPath = g
+    .append("path")
+    .datum(data.concat([data[0]]))
+    .attr("fill", "#2185d0")
+    .attr("fill-opacity", 0.5)
+    .attr("stroke", "#2185d0")
+    .attr("stroke-width", 2)
+    .attr(
+      "d",
+      d3
+        .lineRadial()
+        .radius(() => 0)
+        .angle((d, i) => i * angleSlice)
+    );
+
+  radarPath.transition().duration(800).attr("d", radarLine);
+
+  g.selectAll(".radar-point")
+    .data(data.map((d, i) => ({ value: d, index: i })))
+    .enter()
+    .append("circle")
+    .attr("class", "radar-point")
+    .attr("r", 4)
+    .attr("fill", "#2185d0")
+    .attr("cx", 0)
+    .attr("cy", 0)
+    .on("mouseover", function (event, d) {
+      const feature = features[d.index];
+      d3.select("#radarTooltip")
+        .style("display", "block")
+        .html(`${feature}: <b>${d.value.toFixed(3)}</b>`);
+      d3.select(this).attr("fill", "#ff6600");
+    })
+    .on("mousemove", function (event) {
+      d3.select("#radarTooltip")
+        .style("left", event.pageX + 10 + "px")
+        .style("top", event.pageY - 10 + "px");
+    })
+    .on("mouseout", function () {
+      d3.select("#radarTooltip").style("display", "none");
+      d3.select(this).attr("fill", "#2185d0");
+    })
+    .transition()
+    .duration(800)
+    .attr(
+      "cx",
+      (d) => rScale(d.value) * Math.cos(angleSlice * d.index - Math.PI / 2)
+    )
+    .attr(
+      "cy",
+      (d) => rScale(d.value) * Math.sin(angleSlice * d.index - Math.PI / 2)
+    )
+    .attr("r", 4)
+    .attr("fill", "#2185d0");
 }
 
 /* --- 人気度ランキング表の描画 --- */
