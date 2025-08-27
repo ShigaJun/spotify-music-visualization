@@ -1,42 +1,46 @@
-
 .ui.header {
-    margin-top: 0rem !important;
+  margin-top: 0rem !important;
 }
 
 .ui.segment {
-    padding: 0 0;
+  padding: 0 0;
 }
 
 .caption {
-    color: gray;
+  color: gray;
 }
 
 form .item {
-    float: left;
-    margin-right: 2.0em;
+  float: left;
+  margin-right: 2em;
 }
 
 form .item input {
-    margin-right: 0.5em;
+  margin-right: 0.5em;
 }
 
 #toTopBtn {
-    display: none;
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    z-index: 99;
-    font-size: 24px;
-    border: none;
-    outline: none;
-    background-color: #2185d0;
-    color: white;
-    cursor: pointer;
-    padding: 12px 18px;
-    border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: background 0.2s;
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 99;
+  font-size: 24px;
+  border: none;
+  outline: none;
+  background-color: #2185d0;
+  color: white;
+  cursor: pointer;
+  padding: 12px 18px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s;
 }
 #toTopBtn:hover {
-    background-color: #1678c2;
+  background-color: #1678c2;
+}
+
+/* 選択行の背景色 */
+.selected-row {
+  background-color: #ffe7b3 !important;
 }

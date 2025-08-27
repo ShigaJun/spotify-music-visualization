@@ -350,6 +350,8 @@ let drawRankingTable = function (dataAll) {
       ) {
         // 既にチャートが表示されている場合は閉じる（削除）
         d3.select(nextRow).remove();
+        // ★チャートを閉じた時は背景色も戻す
+        currentRow.classed("selected-row", false);
         return;
       }
 
@@ -363,6 +365,10 @@ let drawRankingTable = function (dataAll) {
           return tableRow.nextSibling;
         })
         .attr("class", "radar-chart-row");
+
+      // 全行から.selected-rowを外し、クリック行に付与
+      d3.selectAll("tr").classed("selected-row", false);
+      d3.select(this).classed("selected-row", true);
 
       // チャート用セルを追加（colspan=3で横幅を揃える）
       chartRow
