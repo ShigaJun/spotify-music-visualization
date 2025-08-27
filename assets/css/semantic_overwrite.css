@@ -6,6 +6,12 @@
   padding: 0 0;
 }
 
+.ui.footer {
+  margin-bottom: 0rem !important; /* ★下マージンを0に */
+  margin-top: 0rem; /* ★必要なら上マージンも調整 */
+  padding: 1em 0; /* ★必要ならパディングも調整 */
+}
+
 .caption {
   color: gray;
 }

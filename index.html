@@ -22,7 +22,9 @@
       <div class="ui column grid">
         <div class="wide column">
           <div class="ui hidden divider"></div>
-          <h1 class="ui center aligned header">Spotify アニメ楽曲人気度ランキング</h1>
+          <h1 class="ui center aligned header">
+            Spotify アニメ楽曲人気度ランキング
+          </h1>
           <div class="ui center aligned basic segment">
             <span class="caption"
               >データソース：<a
@@ -38,28 +40,6 @@
     </div>
 
     <div id="rankingTableContainer"></div>
-
-    <div class="ui container">
-      <div id="viewportContainer"></div>
-    </div>
-
-    <div class="ui hidden divider"></div>
-
-    <!-- <div class="ui container">
-        <div class="ui three column grid">
-            <div class="column">
-                <div>&nbsp;</div>
-            </div>
-            <div class="column">
-                <div>
-                    <h3>データ変数の選択: </h3><span id="variableSelector"></span>
-                </div>
-            </div>
-            <div class="column">
-                <div>&nbsp;</div>
-            </div>
-        </div>
-    </div> -->
 
     <!-- Library -->
     <script
@@ -79,6 +59,34 @@
     <script src="assets/js/main.js"></script>
     <!-- /Original -->
 
-    <div id="radarTooltip" style="position:absolute; display:none; pointer-events:none; background:rgba(0,0,0,0.8); color:#fff; padding:4px 8px; border-radius:4px; font-size:13px; z-index:1000;"></div>
+    <div
+      id="radarTooltip"
+      style="
+        position: absolute;
+        display: none;
+        pointer-events: none;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 13px;
+        z-index: 1000;
+      "
+    ></div>
   </body>
+
+  <footer class="ui footer">
+    <div class="ui vertical footer segment">
+      <div class="ui center aligned container">
+        <span class="caption">
+          情報可視化最終課題 - &copy; 2025 Haruto Watanabe |
+          <a
+            href="https://github.com/ShigaJun/spotify-music-visualization.git"
+            target="_blank"
+            >GitHub</a
+          >
+        </span>
+      </div>
+    </div>
+  </footer>
 </html>
